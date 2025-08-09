@@ -3,431 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberGuard</title>
+    <meta name="description" content="CyberGuard - All-in-one security and encryption tools  - Made by Yasser">
+    <meta name="theme-color" content="#3498db">
+    <title>CyberGuard - Security Tools Suite</title>
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/diff@5.0.0/dist/diff.min.js"></script>
-
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-            --bg-primary: #f4f6f7;
-            --bg-secondary: white;
-            --text-primary: #333;
-            --input-border: #e0e0e0;
-        }
-
-        body.dark-mode {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --text-primary: #e0e0e0;
-            --input-border: #444;
-        }
-
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .tool-card {
-            background-color: var(--bg-secondary);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .tool-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .tool-icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid var(--input-border);
-            border-radius: 8px;
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background-color: var(--primary-color);
-            color: white;
-            transition: opacity 0.3s;
-            margin: 5px;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
-        }
-
-        .strength-meter {
-            height: 10px;
-            background-color: var(--input-border);
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .strength-indicator {
-            height: 100%;
-            width: 0;
-            transition: width 0.3s, background-color 0.3s;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
-
-        .feature-item {
-            background-color: var(--bg-primary);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.9em;
-        }
-
-        .dark-mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s;
-        }
-
-        .dark-mode-toggle:hover {
-            transform: rotate(180deg);
-        }
-
-        .checkmark {
-            color: var(--secondary-color);
-            font-size: 1.2em;
-            display: none;
-        }
-
-        .checkmark.show {
-            display: inline;
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltip-text {
-            visibility: hidden;
-            background-color: var(--text-primary);
-            color: var(--bg-secondary);
-            text-align: center;
-            padding: 5px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .password-history {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: var(--bg-primary);
-            border-radius: 8px;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px;
-            border-bottom: 1px solid var(--input-border);
-        }
-            /* URL and files Scanner Styles */
-.tabs {
-    display: flex;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--input-border);
-}
-
-.tab {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.tab.active {
-    opacity: 1;
-    border-bottom: 2px solid var(--primary-color);
-    margin-bottom: -2px;
-}
-
-.loader {
-    display: none;
-    text-align: center;
-    margin: 1rem 0;
-    color: var(--primary-color);
-}
-
-.loader.show {
-    display: block;
-}
-
-.error {
-    color: var(--danger-color);
-    margin-top: 0.5rem;
-    display: none;
-}
-
-.error.show {
-    display: block;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.stat-card {
-    background: var(--bg-primary);
-    padding: 0.5rem;
-    border-radius: 6px;
-    text-align: center;
-}
-
-.stat-card h3 {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.stat-card p {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.malicious { color: var(--danger-color); }
-.clean { color: var(--secondary-color); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-.status {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 6px;
-    display: none;
-    animation: fadeIn 0.5s ease-in;
-}
-
-.success {
-    background-color: color-mix(in srgb, var(--secondary-color) 20%);
-    color: var(--text-primary);
-}
-
-.error {
-    background-color: color-mix(in srgb, var(--danger-color) 20%);
-    color: var(--text-primary);
-}
-
-.button-group {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-/* Steganography Tool Styles */
-.tabs {
-    display: flex;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--input-border);
-}
-
-.tab {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    opacity: 0.7;
-    transition: all 0.3s ease;
-}
-
-.tab.active {
-    opacity: 1;
-    border-bottom: 2px solid var(--primary-color);
-    margin-bottom: -2px;
-}
-
-.drop-zone {
-    border: 2px dashed var(--input-border);
-    border-radius: 8px;
-    padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-}
-
-.drop-zone:hover {
-    border-color: var(--primary-color);
-    background-color: color-mix(in srgb, var(--primary-color) 10%);
-}
-
-.preview {
-    max-width: 100%;
-    margin-top: 1rem;
-    border-radius: 8px;
-    display: none;
-}
-
-/* QR Code Styles */
-.qrcode-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 10px 0;
-}
-
-#qrcode canvas {
-    border: 1px solid var(--input-border);
-    border-radius: 8px;
-    padding: 5px;
-}
-
-.tool-card.hash-card {
-  grid-column: 1 / -1;
-}
-.tool-card input,
-.tool-card textarea,
-.tool-card select
-{
-  width: 90%;       /* Change from 100% to 80% */
-  padding: 9px;     /* Decrease padding */
-  font-size: 0.9em; /* Optionally adjust font size */
-}
-
-
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-    <button class="dark-mode-toggle" title="Toggle Dark Mode">🌓</button>
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
+        <span class="mode-icon">🌓</span>
+    </button>
     
+    <!-- Main Container -->
     <div class="container">
-        <div class="header">
+        <!-- Header Section -->
+        <header class="header">
             <div class="logo">🛡️ CyberGuard</div>
-            <p>All-in-one security and encryption tools</p>
-        </div>
+            <p class="tagline">All-in-one security and encryption tools - Made by Yasser</p>
+        </header>
 
-        <div class="tools-grid">
+        <!-- Tools Grid -->
+        <main class="tools-grid">
+            
             <!-- Password Generator Card -->
-            <div class="tool-card">
+            <article class="tool-card" id="passwordGeneratorCard">
                 <div class="tool-header">
                     <span class="tool-icon">🔐</span>
                     <h2>Password Generator</h2>
                 </div>
                 <div class="input-group">
                     <div class="tooltip">
-                        <input type="text" id="generatedPassword" readonly>
+                        <input type="text" id="generatedPassword" readonly aria-label="Generated password">
                         <span class="tooltip-text">Click the copy button to copy password</span>
                     </div>
-                    <button class="btn" id="copyBtn">Copy <span class="checkmark">✓</span></button>
+                    <button class="btn btn-primary" id="copyBtn">
+                        Copy <span class="checkmark">✓</span>
+                    </button>
                 </div>
                 <div class="input-group">
-                    <input type="range" id="passwordLength" min="8" max="32" value="16">
+                    <label for="passwordLength">Password Length</label>
+                    <input type="range" id="passwordLength" min="8" max="32" value="16" aria-label="Password length slider">
                     <span id="lengthValue">16 characters</span>
                 </div>
                 <div class="feature-list">
@@ -444,1216 +66,293 @@
                         <input type="checkbox" id="includeSpecial" checked> #$@
                     </label>
                 </div>
-                <button class="btn" id="generateBtn">Generate New Password</button>
+                <button class="btn btn-primary" id="generateBtn">Generate New Password</button>
                 <div class="password-history">
                     <h4>Recent Passwords</h4>
                     <div id="passwordHistory"></div>
                 </div>
-            </div>
+            </article>
 
             <!-- Password Strength Checker Card -->
-            <div class="tool-card">
+            <article class="tool-card" id="passwordAnalyzerCard">
                 <div class="tool-header">
                     <span class="tool-icon">📊</span>
                     <h2>Password Analyzer</h2>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="passwordInput" placeholder="Enter password to analyze">
-                    <button class="btn" id="togglePassword">👁️</button>
+                    <input type="password" id="passwordInput" placeholder="Enter password to analyze" aria-label="Password to analyze">
+                    <button class="btn btn-secondary" id="togglePassword" aria-label="Toggle password visibility">👁️</button>
                 </div>
-                <div class="strength-meter">
+                <div class="strength-meter" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     <div id="strengthIndicator" class="strength-indicator"></div>
                 </div>
-                <p id="strengthText"></p>
-                <p id="entropyText"></p>
-                <div id="strengthDetails"></div>
-            </div>
+                <p id="strengthText" class="strength-text"></p>
+                <p id="entropyText" class="entropy-text"></p>
+                <div id="strengthDetails" class="strength-details"></div>
+            </article>
 
-            <!-- Encryption Tool Card -->
-            <div class="tool-card">
+            <!-- Text Encryption Tool Card -->
+            <article class="tool-card" id="encryptionCard">
                 <div class="tool-header">
                     <span class="tool-icon">🔒</span>
                     <h2>Text Encryption</h2>
                 </div>
-                <textarea id="encryptInput" placeholder="Enter text to encrypt/decrypt..."></textarea>
+                <textarea id="encryptInput" placeholder="Enter text to encrypt/decrypt..." aria-label="Text to encrypt or decrypt"></textarea>
                 <div class="input-group">
-                    <select id="encryptionMethod">
+                    <label for="encryptionMethod">Encryption Method</label>
+                    <select id="encryptionMethod" aria-label="Select encryption method">
                         <option value="aes">AES (Advanced Encryption)</option>
-                        <option value="base64">Base64 (Simple)</option>
+                        <option value="base64">Base64 (Simple Encoding)</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <input type="password" id="encryptKey" placeholder="Encryption key (for AES)">
+                    <input type="password" id="encryptKey" placeholder="Encryption key (for AES)" aria-label="Encryption key">
                 </div>
                 <div class="button-group">
-                    <button class="btn" onclick="encryptText()">Encrypt</button>
-                    <button class="btn" onclick="decryptText()">Decrypt</button>
+                    <button class="btn btn-primary" id="encryptBtn">Encrypt</button>
+                    <button class="btn btn-secondary" id="decryptBtn">Decrypt</button>
                 </div>
-                <textarea id="encryptOutput" placeholder="Result will appear here..." readonly></textarea>
-            </div>
+                <textarea id="encryptOutput" placeholder="Result will appear here..." readonly aria-label="Encryption result"></textarea>
+            </article>
 
             <!-- Hash Generator Card -->
-            <div class="tool-card hash-card">
+            <article class="tool-card hash-card" id="hashGeneratorCard">
                 <div class="tool-header">
                     <span class="tool-icon">🔍</span>
                     <h2>Hash Generator</h2>
                 </div>
-                <textarea id="hashInput" placeholder="Enter text to hash..."></textarea>
+                <textarea id="hashInput" placeholder="Enter text to hash..." aria-label="Text to hash"></textarea>
                 <div class="input-group">
-                    <select id="hashAlgorithm">
+                    <label for="hashAlgorithm">Hash Algorithm</label>
+                    <select id="hashAlgorithm" aria-label="Select hash algorithm">
                         <option value="SHA-256">SHA-256</option>
                         <option value="SHA-512">SHA-512</option>
-                        <option value="MD5">MD5</option>
-                        <option value="SHA-1">SHA-1</option>
+                        <option value="MD5">MD5 (Not recommended for security)</option>
+                        <option value="SHA-1">SHA-1 (Deprecated)</option>
                     </select>
                 </div>
-                <button class="btn" onclick="computeHash()">Generate Hash</button>
-                <textarea id="hashOutput" placeholder="Hash result will appear here..." readonly></textarea>
-            </div>
-            
-        </div>
+                <button class="btn btn-primary" id="computeHashBtn">Generate Hash</button>
+                <textarea id="hashOutput" placeholder="Hash result will appear here..." readonly aria-label="Hash result"></textarea>
+            </article>
 
-          <!-- File Encryption Card -->
-<div class="tool-card">
-    <div class="tool-header">
-        <span class="tool-icon">📁</span>
-        <h2>File Encryption</h2>
+            <!-- File Encryption Card -->
+            <article class="tool-card" id="fileEncryptionCard">
+                <div class="tool-header">
+                    <span class="tool-icon">📁</span>
+                    <h2>File Encryption</h2>
+                </div>
+                <div class="input-group">
+                    <label for="file">Select File</label>
+                    <input type="file" id="file" required aria-label="File to encrypt or decrypt">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="filePassword" placeholder="Encryption key" required aria-label="File encryption key">
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" id="encryptFileBtn">Encrypt File</button>
+                    <button class="btn btn-secondary" id="decryptFileBtn">Decrypt File</button>
+                </div>
+                <div id="fileStatus" class="status" role="status" aria-live="polite"></div>
+            </article>
+
+            <!-- File Integrity Checker Card -->
+            <article class="tool-card" id="fileIntegrityCard">
+                <div class="tool-header">
+                    <span class="tool-icon">✅</span>
+                    <h2>File Integrity Checker</h2>
+                </div>
+                <div class="input-group">
+                    <label for="integrityFile">Select File to Check</label>
+                    <input type="file" id="integrityFile" required aria-label="File for integrity check">
+                </div>
+                <div class="input-group">
+                    <label for="hashAlgorithmSelect">Hash Algorithm</label>
+                    <select id="hashAlgorithmSelect" aria-label="Select hash algorithm for file">
+                        <option value="MD5">MD5</option>
+                        <option value="SHA-256">SHA-256</option>
+                        <option value="SHA-512">SHA-512</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="computeFileHashBtn">Compute Hash</button>
+                <div class="input-group">
+                    <textarea id="integrityOutput" placeholder="Hash result will appear here..." readonly aria-label="File hash result"></textarea>
+                </div>
+            </article>
+
+            <!-- URL and Files Scanner Card -->
+            <article class="tool-card" id="threatScannerCard">
+                <div class="tool-header">
+                    <span class="tool-icon">🛡️</span>
+                    <h2>Threat Scanner</h2>
+                </div>
+                <div class="tabs" role="tablist">
+                    <button class="tab active" data-tab="url" role="tab" aria-selected="true">URL Scan</button>
+                    <button class="tab" data-tab="file" role="tab" aria-selected="false">File Scan</button>
+                </div>
+                <div id="urlScan" class="scan-section" role="tabpanel">
+                    <div class="input-group">
+                        <input type="text" id="urlInput" placeholder="Enter URL to scan" aria-label="URL to scan">
+                        <div class="error" id="urlError" role="alert"></div>
+                    </div>
+                    <button class="btn btn-primary" id="scanUrlBtn">
+                        <span class="btn-icon">🔍</span> Scan URL
+                    </button>
+                </div>
+                <div id="fileScan" class="scan-section" style="display: none;" role="tabpanel">
+                    <div class="input-group">
+                        <input type="file" id="fileInput" aria-label="File to scan">
+                        <div class="error" id="fileError" role="alert"></div>
+                    </div>
+                    <button class="btn btn-primary" id="scanFileBtn">
+                        <span class="btn-icon">📄</span> Scan File
+                    </button>
+                </div>
+                <div class="loader" aria-live="polite">
+                    <div class="spinner"></div>
+                    <p>Scanning... Please wait</p>
+                </div>
+                <div class="scan-result">
+                    <p class="scan-note">Note: Remove trailing "/" from URLs if no results appear. Sometimes multiple scans are needed.</p>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <h3>Malicious</h3>
+                            <p class="malicious" id="maliciousCount">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Clean</h3>
+                            <p class="clean" id="cleanCount">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Suspicious</h3>
+                            <p id="suspiciousCount">0</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Steganography Tool Card -->
+            <article class="tool-card" id="steganographyCard">
+                <div class="tool-header">
+                    <span class="tool-icon">🖼️</span>
+                    <h2>Steganography</h2>
+                </div>
+                <div class="tabs" role="tablist">
+                    <button class="tab active" data-panel="encode" role="tab" aria-selected="true">Encode / Decode</button>
+                </div>
+                
+                <!-- Encode Panel -->
+                <div class="panel active" id="encode" role="tabpanel">
+                    <div class="input-group">
+                        <label for="stegMessage">Secret Message</label>
+                        <textarea id="stegMessage" placeholder="Enter secret message..." aria-label="Secret message to encode"></textarea>
+                    </div>
+                    <div class="drop-zone" id="stegDropZone">
+                        <p>Drag & drop image or click to upload</p>
+                        <input type="file" id="stegFileInput" accept="image/*" hidden aria-label="Image for steganography">
+                        <img class="preview" id="stegPreview" alt="Preview">
+                    </div>
+                    <button class="btn btn-primary" id="encodeBtn" disabled>Encode Message</button>
+                    <div id="stegDownload" class="status" style="display: none;">
+                        <button class="btn btn-success" id="downloadBtn">Download Image</button>
+                    </div>
+                </div>
+
+                <!-- Decode Panel -->
+                <div class="panel" id="decode" role="tabpanel">
+                    <div class="drop-zone" id="decodeDropZone">
+                        <p>Drag & drop encoded image</p>
+                        <input type="file" id="stegDecodeFileInput" accept="image/*" hidden aria-label="Encoded image to decode">
+                        <img class="preview" id="decodePreview" alt="Preview">
+                    </div>
+                    <button class="btn btn-primary" id="decodeBtn" disabled>Decode Message</button>
+                    <div id="decodeResult" class="status" style="display: none;">
+                        <textarea id="decodedMessage" readonly aria-label="Decoded message"></textarea>
+                    </div>
+                </div>
+            </article>
+
+            <!-- QR Code Generator Card -->
+            <article class="tool-card" id="qrGeneratorCard">
+                <div class="tool-header">
+                    <span class="tool-icon">📷</span>
+                    <h2>QR Code Generator</h2>
+                </div>
+                <div class="input-group">
+                    <label for="qrText">Text or URL</label>
+                    <input type="text" id="qrText" placeholder="Enter text or URL" aria-label="Text for QR code">
+                </div>
+                <div class="checkbox-group">
+                    <label class="feature-item">
+                        <input type="checkbox" id="qrEncryptToggle"> Encrypt Content
+                    </label>
+                </div>
+                <div class="input-group" id="qrPasswordInput" style="display: none;">
+                    <input type="password" id="qrPassword" placeholder="Encryption password" aria-label="QR encryption password">
+                </div>
+                <button class="btn btn-primary" id="generateQRBtn">Generate QR Code</button>
+                <button class="btn btn-success" id="qrDownloadBtn" style="display: none;">Download QR</button>
+                <div id="qrcode" class="qrcode-container"></div>
+            </article>
+
+            <!-- Base Conversion Tool Card -->
+            <article class="tool-card" id="baseConversionCard">
+                <div class="tool-header">
+                    <span class="tool-icon">🔢</span>
+                    <h2>Base Converter</h2>
+                </div>
+                <div class="input-group">
+                    <label for="baseInput">Input Text or Code</label>
+                    <textarea id="baseInput" placeholder="Enter text or code..." aria-label="Text for base conversion"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="conversionDirection">Conversion Direction</label>
+                    <select id="conversionDirection" aria-label="Conversion direction">
+                        <option value="encode">Encode (Text → Code)</option>
+                        <option value="decode">Decode (Code → Text)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="conversionType">Conversion Type</label>
+                    <select id="conversionType" aria-label="Conversion type">
+                        <option value="binary">Binary</option>
+                        <option value="hex">Hexadecimal</option>
+                        <option value="decimal">Decimal</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" id="convertBaseBtn">Convert</button>
+                <div class="input-group">
+                    <textarea id="baseOutput" placeholder="Conversion result will appear here..." readonly aria-label="Base conversion result"></textarea>
+                </div>
+            </article>
+
+            <!-- Text Diff Checker Tool Card -->
+            <article class="tool-card" id="fileDiffCard">
+                <div class="tool-header">
+                    <span class="tool-icon">🔍</span>
+                    <h2>Text Diff Checker</h2>
+                </div>
+                <div class="input-group">
+                    <label for="diffInput1">First Text</label>
+                    <textarea id="diffInput1" placeholder="Enter first text or file content..." aria-label="First text for comparison"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="diffInput2">Second Text</label>
+                    <textarea id="diffInput2" placeholder="Enter second text or file content..." aria-label="Second text for comparison"></textarea>
+                </div>
+                <button class="btn btn-primary" id="compareTextBtn">Compare</button>
+                <div class="input-group">
+                    <div id="diffOutput" class="diff-output" aria-label="Comparison result"></div>
+                </div>
+                <p class="note">Note: Added parts have green background, removed parts have red background</p>
+            </article>
+
+        </main>
     </div>
-    <div class="input-group">
-        <input type="file" id="file" required>
-    </div>
-    <div class="input-group">
-        <input type="password" id="filePassword" placeholder="Encryption key" required>
-    </div>
-    <div class="button-group">
-        <button class="btn" onclick="encryptFile()">Encrypt File</button>
-        <button class="btn" onclick="decryptFile()">Decrypt File</button>
-    </div>
-    <div id="fileStatus" class="status"></div>
-</div>
 
-<!-- File Integrity Checker Card -->
-<div class="tool-card" id="fileIntegrityCard">
-    <div class="tool-header">
-      <span class="tool-icon">🔍</span>
-      <h2>File Integrity Checker</h2>
-    </div>
-    <div class="input-group">
-      <input type="file" id="integrityFile" required>
-    </div>
-    <div class="input-group">
-      <select id="hashAlgorithmSelect">
-        <option value="MD5">MD5</option>
-        <option value="SHA-256">SHA-256</option>
-        <option value="SHA-512">SHA-512</option>
-      </select>
-    </div>
-    <button class="btn" onclick="computeFileHash()">Compute Hash</button>
-    <div class="input-group">
-      <textarea id="integrityOutput" placeholder="Hash result will appear here..." readonly></textarea>
-    </div>
-  </div>
-  
+    <!-- Notification Container -->
+    <div id="notificationContainer" class="notification-container" aria-live="polite"></div>
 
-      <!-- URL and files Scanner Card -->
-<div class="tool-card">
-    <div class="tool-header">
-        <span class="tool-icon">🛡️</span>
-        <h2>Threat Scanner</h2>
-    </div>
-    <div class="tabs">
-        <button class="tab active" data-tab="url">URL Scan</button>
-        <button class="tab" data-tab="file">File Scan</button>
-    </div>
-    <div id="urlScan" class="scan-section">
-        <div class="input-group">
-            <input type="text" id="urlInput" placeholder="Enter URL to scan">
-            <div class="error" id="urlError"></div>
-        </div>
-        <button class="btn" id="scanUrlBtn">
-            <i class="fas fa-search"></i> Scan URL
-        </button>
-    </div>
-    <div id="fileScan" class="scan-section" style="display: none;">
-        <div class="input-group">
-            <input type="file" id="fileInput">
-            <div class="error" id="fileError"></div>
-        </div>
-        <button class="btn" id="scanFileBtn">
-            <i class="fas fa-file-medical"></i> Scan File
-        </button>
-    </div>
-    <div class="loader">
-        <i class="fas fa-spinner fa-spin fa-2x"></i>
-        <p>Scanning... Please wait</p>
-    </div>
-    <div class="result">
-        
-        <h4>if no results appear make sure to remove ( / ) at the end and scan again and sometimes you have to scan twice</h4>
-        <div class="stats">
-            
-            <div class="stat-card">
-                <h3>Malicious</h3>
-                <p class="malicious" id="maliciousCount">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>Clean</h3>
-                <p class="clean" id="cleanCount">0</p>
-            </div>
-            <div class="stat-card">
-                <h3>Suspicious</h3>
-                <p id="suspiciousCount">0</p>
-            </div>
-        </div>
-      </div>
-    </div>
-
-     <!-- Steganography Tool Card -->
-<div class="tool-card">
-    <div class="tool-header">
-        <span class="tool-icon">🖼️</span>
-        <h2>Steganography</h2>
-    </div>
-    <div class="tabs">
-        <button class="tab active" data-panel="encode">Encode / Decode</button>    <!--############################################ -->
-      <!-- <button class="tab" data-panel="decode">Decode</button> -->      <!-- Uncomment this line to enable decoding -->
-    </div>                                                              <!--######################################### -->
-    
-    <!-- Encode Panel -->
-    <div class="panel active" id="encode">
-        <div class="input-group">
-            <textarea id="stegMessage" placeholder="Enter secret message..."></textarea>
-        </div>
-        <div class="drop-zone" id="stegDropZone">
-            <p>Drag & drop image or click to upload</p>
-            <input type="file" id="stegFileInput" accept="image/*" hidden>
-            <img class="preview" id="stegPreview">
-        </div>
-        <button class="btn" id="encodeBtn" disabled>Encode Message</button>
-        <div id="stegDownload" class="status" style="display: none;">
-            <button class="btn" id="downloadBtn">Download Image</button>
-        </div>
-    </div>
-
-    <!-- Decode Panel -->
-    <div class="panel" id="decode">
-        <div class="drop-zone" id="decodeDropZone">
-            <p>Drag & drop encoded image</p>
-            <input type="file" id="stegDecodeFileInput" accept="image/*" hidden>
-            <img class="preview" id="decodePreview">
-        </div>
-        <button class="btn" id="decodeBtn" disabled>Decode Message</button>
-        <div id="decodeResult" class="status" style="display: none;">
-            <textarea id="decodedMessage" readonly></textarea>
-        </div>
-       </div>
-     </div>
-
-     <!-- QR Code Generator Card -->
-<div class="tool-card">
-    <div class="tool-header">
-        <span class="tool-icon">📷</span>
-        <h2>QR Code Generator</h2>
-    </div>
-    <div class="input-group">
-        <input type="text" id="qrText" placeholder="Enter text or URL">
-    </div>
-    <div class="checkbox-group">
-        <label class="feature-item">
-            <input type="checkbox" id="qrEncryptToggle"> Encrypt Content
-        </label>
-    </div>
-    <div class="input-group" id="qrPasswordInput" style="display: none;">
-        <input type="password" id="qrPassword" placeholder="Encryption password">
-    </div>
-    <button class="btn" onclick="generateQR()">Generate QR Code</button>
-    <button class="btn" onclick="downloadQR()" id="qrDownloadBtn" style="display: none;">Download QR</button>
-    <div id="qrcode" class="qrcode-container"></div>
-</div>
- 
-<!-- Base Conversion Tool Card -->
-<div class="tool-card" id="baseConversionCard">
-    <div class="tool-header">
-      <span class="tool-icon">🔢</span>
-      <h2>Base Converter</h2>
-    </div>
-    <div class="input-group">
-      <textarea id="baseInput" placeholder="Enter text or code..."></textarea>
-    </div>
-    <div class="input-group">
-      <select id="conversionDirection">
-        <option value="encode">Encode (Text → Code)</option>
-        <option value="decode">Decode (Code → Text)</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <select id="conversionType">
-        <option value="binary">Binary</option>
-        <option value="hex">Hexadecimal</option>
-        <option value="decimal">Decimal</option>
-      </select>
-    </div>
-    <button class="btn" onclick="convertBase()">Convert</button>
-    <div class="input-group">
-      <textarea id="baseOutput" placeholder="Conversion result will appear here..." readonly></textarea>
-    </div>
-  </div>
-  
-  <!-- File Diff Checker Tool Card -->
-<div class="tool-card" id="fileDiffCard">
-    <div class="tool-header">
-      <span class="tool-icon">🔍</span>
-      <h2>Text Diff Checker </h2> 
-      
-    </div>
-    <div class="input-group">
-      <textarea id="diffInput1" placeholder="Enter first text or file content..."></textarea>
-    </div>
-    <div class="input-group">
-      <textarea id="diffInput2" placeholder="Enter second text or file content..."></textarea>
-    </div>
-    <button class="btn" onclick="compareText()">Compare</button>
-    <div class="input-group">
-      <!-- Using a div for HTML output allows styled differences -->
-      <div id="diffOutput" style="padding: 10px; border: 2px solid var(--input-border); border-radius: 8px; background-color: var(--bg-secondary); min-height: 100px;"></div>
-    </div>
-    note* :  added parts is in green background and removed parts is in red background
-
-  </div>
-  
-        
-   </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script>
-        // Dark Mode Toggle
-        const darkModeToggle = document.querySelector('.dark-mode-toggle');
-        
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        });
-
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-        }
-        
-        // Password Generator
-        const passwordHistory = [];
-        const maxHistoryItems = 5;
-
-        function updatePasswordLength() {
-            const length = document.getElementById('passwordLength').value;
-            document.getElementById('lengthValue').textContent = `${length} characters`;
-        }
-
-        document.getElementById('passwordLength').addEventListener('input', updatePasswordLength);
-
-        function generatePassword() {
-            const length = document.getElementById('passwordLength').value;
-            const uppercase = document.getElementById('includeUppercase').checked;
-            const lowercase = document.getElementById('includeLowercase').checked;
-            const numbers = document.getElementById('includeNumbers').checked;
-            const special = document.getElementById('includeSpecial').checked;
-
-            if (!uppercase && !lowercase && !numbers && !special) {
-                alert('Please select at least one character type');
-                return;
-            }
-
-            const chars = {
-                uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-                lowercase: 'abcdefghijklmnopqrstuvwxyz',
-                numbers: '0123456789',
-                special: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-            };
-
-            let validChars = '';
-            if (uppercase) validChars += chars.uppercase;
-            if (lowercase) validChars += chars.lowercase;
-            if (numbers) validChars += chars.numbers;
-            if (special) validChars += chars.special;
-
-            let password = '';
-            // Ensure at least one character from each selected type
-            if (uppercase) password += chars.uppercase.charAt(Math.floor(Math.random() * chars.uppercase.length));
-            if (lowercase) password += chars.lowercase.charAt(Math.floor(Math.random() * chars.lowercase.length));
-            if (numbers) password += chars.numbers.charAt(Math.floor(Math.random() * chars.numbers.length));
-            if (special) password += chars.special.charAt(Math.floor(Math.random() * chars.special.length));
-
-            // Fill the rest randomly
-            while (password.length < length) {
-                password += validChars.charAt(Math.floor(Math.random() * validChars.length));
-            }
-
-            // Shuffle the password
-            password = password.split('').sort(() => Math.random() - 0.5).join('');
-            
-            document.getElementById('generatedPassword').value = password;
-            addToHistory(password);
-            checkPasswordStrength(password);
-        }
-
-        function addToHistory(password) {
-            passwordHistory.unshift(password);
-            if (passwordHistory.length > maxHistoryItems) {
-                passwordHistory.pop();
-            }
-            updateHistoryDisplay();
-        }
-
-        function updateHistoryDisplay() {
-            const historyContainer = document.getElementById('passwordHistory');
-            historyContainer.innerHTML = '';
-            passwordHistory.forEach((pass, index) => {
-                const item = document.createElement('div');
-                item.className = 'history-item';
-                item.innerHTML = `
-                    <span>${pass.replace(/./g, '•')}</span>
-                    <button class="btn" onclick="copyHistoryPassword(${index})">Copy</button>
-                `;
-                historyContainer.appendChild(item);
-            });
-        }
-
-        function copyHistoryPassword(index) {
-            navigator.clipboard.writeText(passwordHistory[index]);
-            showCopyConfirmation();
-        }
-
-        function copyPassword() {
-            const password = document.getElementById('generatedPassword').value;
-            navigator.clipboard.writeText(password);
-            showCopyConfirmation();
-        }
-
-        function showCopyConfirmation() {
-            const checkmark = document.querySelector('.checkmark');
-            checkmark.classList.add('show');
-            setTimeout(() => checkmark.classList.remove('show'), 2000);
-        }
-
-        // Password Strength Checker
-        function checkPasswordStrength(password) {
-            const strengthIndicator = document.getElementById('strengthIndicator');
-            const strengthText = document.getElementById('strengthText');
-            const entropyText = document.getElementById('entropyText');
-            const strengthDetails = document.getElementById('strengthDetails');
-
-            // Initialize scoring
-            let strength = 0;
-            let details = [];
-
-            // Length check
-            if (password.length >= 12) {
-                strength += 2;
-                details.push('✅ Good length (12+ characters)');
-            } else if (password.length >= 8) {
-                strength += 1;
-                details.push('⚠️ Minimum length (8+ characters)');
-            } else {
-                details.push('❌ Too short (less than 8 characters)');
-            }
-
-            // Character type checks
-            if (/[A-Z]/.test(password)) {
-                strength += 1;
-                details.push('✅ Contains uppercase letters');
-            } else {
-                details.push('❌ No uppercase letters');
-            }
-
-            if (/[a-z]/.test(password)) {
-                strength += 1;
-                details.push('✅ Contains lowercase letters');
-            } else {
-                details.push('❌ No lowercase letters');
-            }
-
-            if (/[0-9]/.test(password)) {
-                strength += 1;
-                details.push('✅ Contains numbers');
-            } else {
-                details.push('❌ No numbers');
-            }
-
-            if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
-                strength += 1;
-                details.push('✅ Contains special characters');
-            } else {
-                details.push('❌ No special characters');
-            }
-
-            // Check for common patterns
-            if (/(.)\1{2,}/.test(password)) {
-                strength -= 1;
-                details.push('❌ Contains repeated characters');
-            }
-
-            if (/^(?:abc|123|password|qwerty)/i.test(password)) {
-                strength -= 1;
-                details.push('❌ Contains common patterns');
-            }
-
-            // Calculate entropy
-            const entropy = calculateEntropy(password);
-            entropyText.textContent = `Entropy: ${entropy.toFixed(2)} bits`;
-
-            // Update strength indicator
-            const percentage = (strength / 6) * 100;
-            strengthIndicator.style.width = `${percentage}%`;
-
-            if (strength <= 2) {
-                strengthIndicator.style.backgroundColor = 'var(--danger-color)';
-                strengthText.textContent = 'Weak Password';
-            } else if (strength <= 4) {
-                strengthIndicator.style.backgroundColor = 'var(--warning-color)';
-                strengthText.textContent = 'Medium Password';
-            } else {
-                strengthIndicator.style.backgroundColor = 'var(--secondary-color)';
-                strengthText.textContent = 'Strong Password';
-            }
-
-            // Update details
-            strengthDetails.innerHTML = details.map(detail => `<div>${detail}</div>`).join('');
-        }
-
-        function calculateEntropy(password) {
-            const charSets = {
-                lowercase: 26,
-                uppercase: 26,
-                numbers: 10,
-                special: 32
-            };
-
-            let possibleChars = 0;
-            if (/[a-z]/.test(password)) possibleChars += charSets.lowercase;
-            if (/[A-Z]/.test(password)) possibleChars += charSets.uppercase;
-            if (/[0-9]/.test(password)) possibleChars += charSets.numbers;
-            if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) possibleChars += charSets.special;
-
-            return Math.log2(Math.pow(possibleChars, password.length));
-        }
-
-        // Toggle password visibility
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('passwordInput');
-            const type = passwordInput.type === 'password' ? 'text' : 'password';
-            passwordInput.type = type;
-            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
-        });
-
-        // Encryption/Decryption Functions
-        function encryptText() {
-            const text = document.getElementById('encryptInput').value;
-            const method = document.getElementById('encryptionMethod').value;
-            const key = document.getElementById('encryptKey').value;
-
-            if (!text) {
-                alert('Please enter text to encrypt');
-                return;
-            }
-
-            let result;
-            try {
-                if (method === 'aes') {
-                    if (!key) {
-                        alert('Please enter an encryption key for AES');
-                        return;
-                    }
-                    result = CryptoJS.AES.encrypt(text, key).toString();
-                } else {
-                    result = btoa(text);
-                }
-                document.getElementById('encryptOutput').value = result;
-            } catch (error) {
-                alert('Encryption failed: ' + error.message);
-            }
-        }
-
-        function decryptText() {
-            const text = document.getElementById('encryptOutput').value;
-            const method = document.getElementById('encryptionMethod').value;
-            const key = document.getElementById('encryptKey').value;
-
-            if (!text) {
-                alert('Please enter text to decrypt');
-                return;
-            }
-
-            let result;
-            try {
-                if (method === 'aes') {
-                    if (!key) {
-                        alert('Please enter the decryption key for AES');
-                        return;
-                    }
-                    const bytes = CryptoJS.AES.decrypt(text, key);
-                    result = bytes.toString(CryptoJS.enc.Utf8);
-                    if (!result) throw new Error('Invalid key or corrupted data');
-                } else {
-                    result = atob(text);
-                }
-                document.getElementById('encryptOutput').value = result;
-            } catch (error) {
-                alert('Decryption failed: ' + error.message);
-            }
-        }
-
-        // Hash Generation
-        function computeHash() {
-            const text = document.getElementById('hashInput').value;
-            const algorithm = document.getElementById('hashAlgorithm').value;
-
-            if (!text) {
-                alert('Please enter text to hash');
-                return;
-            }
-
-            let hash;
-            try {
-                switch (algorithm) {
-                    case 'SHA-256':
-                        hash = CryptoJS.SHA256(text);
-                        break;
-                    case 'SHA-512':
-                        hash = CryptoJS.SHA512(text);
-                        break;
-                    case 'MD5':
-                        hash = CryptoJS.MD5(text);
-                        break;
-                    case 'SHA-1':
-                        hash = CryptoJS.SHA1(text);
-                        break;
-                    default:
-                        throw new Error('Unsupported hash algorithm');
-                }
-                document.getElementById('hashOutput').value = hash.toString();
-            } catch (error) {
-                alert('Hash generation failed: ' + error.message);
-            }
-        }
-
-        // Event Listeners
-        document.getElementById('generateBtn').addEventListener('click', generatePassword);
-        document.getElementById('copyBtn').addEventListener('click', copyPassword);
-        document.getElementById('passwordInput').addEventListener('input', function() {
-            checkPasswordStrength(this.value);
-        });
-
-        // Initialize
-        generatePassword();
-        updatePasswordLength();
-           
-        // File Encryption
-
-function showStatus(message, isError = false) {
-    const status = document.getElementById('fileStatus');
-    status.textContent = message;
-    status.style.display = 'block';
-    status.className = `status ${isError ? 'error' : 'success'} fade-in`;
-    setTimeout(() => status.style.display = 'none', 5000);
-}
-
-function downloadFile(content, fileName, contentType) {
-    const a = document.createElement('a');
-    const file = new Blob([content], { type: contentType });
-    a.href = URL.createObjectURL(file);
-    a.download = fileName;
-    a.click();
-    URL.revokeObjectURL(a.href);
-}
-
-function encryptFile() {
-    const fileInput = document.getElementById('file');
-    const passwordInput = document.getElementById('filePassword');
-    
-    if (!fileInput.files.length || !passwordInput.value) {
-        showStatus('Please select a file and enter a password', true);
-        return;
-    }
-
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        try {
-            const wordArray = CryptoJS.lib.WordArray.create(e.target.result);
-            const encrypted = CryptoJS.AES.encrypt(wordArray, passwordInput.value).toString();
-            downloadFile(encrypted, file.name + '.encrypted', 'application/octet-stream');
-            showStatus('File encrypted successfully!');
-        } catch (error) {
-            showStatus('Encryption failed: ' + error.message, true);
-        }
-    };
-
-    reader.readAsArrayBuffer(file);
-}
-
-function decryptFile() {
-    const fileInput = document.getElementById('file');
-    const passwordInput = document.getElementById('filePassword');
-    
-    if (!fileInput.files.length || !passwordInput.value) {
-        showStatus('Please select a file and enter a password', true);
-        return;
-    }
-
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        try {
-            const decrypted = CryptoJS.AES.decrypt(e.target.result, passwordInput.value);
-            const typedArray = convertWordArrayToUint8Array(decrypted);
-            const fileName = file.name.replace('.encrypted', '');
-            downloadFile(typedArray, 'decrypted_' + fileName, 'application/octet-stream');
-            showStatus('File decrypted successfully!');
-        } catch (error) {
-            showStatus('Decryption failed: Invalid password or corrupted file', true);
-        }
-    };
-
-    reader.readAsText(file);
-}
-
-function convertWordArrayToUint8Array(wordArray) {
-    const len = wordArray.words.length;
-    const u8Array = new Uint8Array(len << 2);
-    let offset = 0;
-    let word;
-
-    for (let i = 0; i < len; i++) {
-        word = wordArray.words[i];
-        u8Array[offset++] = word >> 24;
-        u8Array[offset++] = (word >> 16) & 0xff;
-        u8Array[offset++] = (word >> 8) & 0xff;
-        u8Array[offset++] = word & 0xff;
-    }
-
-    return u8Array.slice(0, wordArray.sigBytes);
-}
-  // URL and Files Scanner
-  
-  //  ** plesse note that you must crate an account in VirusTotal and get the API key to be able to use this feature
-const API_KEY = 'Enter Your API Here'; // Replace with your own API key
-//##############################################################################################################################################################
-
-// DOM Elements
-const tabs = document.querySelectorAll('.tab');
-const urlScanSection = document.getElementById('urlScan');
-const fileScanSection = document.getElementById('fileScan');
-const urlInput = document.getElementById('urlInput');
-const fileInput = document.getElementById('fileInput');
-const scanUrlBtn = document.getElementById('scanUrlBtn');
-const scanFileBtn = document.getElementById('scanFileBtn');
-const loader = document.querySelector('.loader');
-const result = document.querySelector('.result');
-const urlError = document.getElementById('urlError');
-const fileError = document.getElementById('fileError');
-
-// Tab switching
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        if (tab.dataset.tab === 'url') {
-            urlScanSection.style.display = 'block';
-            fileScanSection.style.display = 'none';
-        } else {
-            urlScanSection.style.display = 'none';
-            fileScanSection.style.display = 'block';
-        }
-        
-        hideResults();
-    });
-});
-
-// URL Scanning
-scanUrlBtn.addEventListener('click', async () => {
-    const url = urlInput.value.trim();
-    
-    if (!url) {
-        showError(urlError, 'Please enter a URL');
-        return;
-    }
-
-    if (!isValidUrl(url)) {
-        showError(urlError, 'Please enter a valid URL');
-        return;
-    }
-
-    hideError(urlError);
-    showLoader();
-
-    try {
-        const submitResponse = await fetch('https://www.virustotal.com/api/v3/urls', {
-            method: 'POST',
-            headers: {
-                'x-apikey': API_KEY,
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `url=${encodeURIComponent(url)}`
-        });
-
-        if (!submitResponse.ok) throw new Error(`HTTP error! status: ${submitResponse.status}`);
-        
-        const submitData = await submitResponse.json();
-        const analysisId = submitData.data.id;
-
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
-        const analysisResponse = await fetch(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
-            headers: { 'x-apikey': API_KEY }
-        });
-
-        if (!analysisResponse.ok) throw new Error(`HTTP error! status: ${analysisResponse.status}`);
-
-        const analysisData = await analysisResponse.json();
-        const stats = analysisData.data.attributes.stats;
-        
-        document.getElementById('maliciousCount').textContent = stats.malicious || 0;
-        document.getElementById('cleanCount').textContent = stats.harmless || 0;
-        document.getElementById('suspiciousCount').textContent = stats.suspicious || 0;
-        
-        result.classList.add('show');
-    } catch (error) {
-        showError(urlError, `Scan failed: ${error.message}`);
-    } finally {
-        hideLoader();
-    }
-});
-
-// File Scanning
-scanFileBtn.addEventListener('click', async () => {
-    const file = fileInput.files[0];
-    
-    if (!file) {
-        showError(fileError, 'Please select a file');
-        return;
-    }
-
-    if (file.size > 32 * 1024 * 1024) {
-        showError(fileError, 'File size must be less than 32MB');
-        return;
-    }
-
-    hideError(fileError);
-    showLoader();
-
-    try {
-        const urlResponse = await fetch('https://www.virustotal.com/api/v3/files/upload_url', {
-            headers: { 'x-apikey': API_KEY }
-        });
-
-        if (!urlResponse.ok) throw new Error(`HTTP error! status: ${urlResponse.status}`);
-
-        const urlData = await urlResponse.json();
-        const uploadUrl = urlData.data;
-
-        const formData = new FormData();
-        formData.append('file', file);
-
-        const uploadResponse = await fetch(uploadUrl, {
-            method: 'POST',
-            headers: { 'x-apikey': API_KEY },
-            body: formData
-        });
-
-        if (!uploadResponse.ok) throw new Error(`HTTP error! status: ${uploadResponse.status}`);
-
-        const uploadData = await uploadResponse.json();
-        const analysisId = uploadData.data.id;
-
-        await new Promise(resolve => setTimeout(resolve, 3000));
-
-        const analysisResponse = await fetch(`https://www.virustotal.com/api/v3/analyses/${analysisId}`, {
-            headers: { 'x-apikey': API_KEY }
-        });
-
-        if (!analysisResponse.ok) throw new Error(`HTTP error! status: ${analysisResponse.status}`);
-
-        const analysisData = await analysisResponse.json();
-        const stats = analysisData.data.attributes.stats;
-        
-        document.getElementById('maliciousCount').textContent = stats.malicious || 0;
-        document.getElementById('cleanCount').textContent = stats.harmless || 0;
-        document.getElementById('suspiciousCount').textContent = stats.suspicious || 0;
-        
-        result.classList.add('show');
-    } catch (error) {
-        showError(fileError, `Scan failed: ${error.message}`);
-    } finally {
-        hideLoader();
-    }
-});
-
-// Helper functions
-function showLoader() {
-    loader.classList.add('show');
-    result.classList.remove('show');
-}
-
-function hideLoader() {
-    loader.classList.remove('show');
-}
-
-function showError(element, message) {
-    element.textContent = message;
-    element.classList.add('show');
-}
-
-function hideError(element) {
-    element.classList.remove('show');
-    element.textContent = '';
-}
-
-function hideResults() {
-    result.classList.remove('show');
-}
-
-function isValidUrl(string) {
-    try {
-        new URL(string);
-        return true;
-    } catch (_) {
-        return false;
-    }
-}
-
-// Steganography Tool
-class SteganographyTool {
-    constructor() {
-        this.currentImage = null;
-        this.setupEventListeners();
-    }
-
-    setupEventListeners() {
-        // Tab switching
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => this.switchTab(tab));
-        });
-
-        // File upload handlers
-        this.setupDropZone('stegDropZone', 'stegFileInput', 'stegPreview', 'encodeBtn');
-        this.setupDropZone('decodeDropZone', 'stegDecodeFileInput', 'decodePreview', 'decodeBtn');
-
-        // Button click handlers
-        document.getElementById('encodeBtn').addEventListener('click', () => this.encodeMessage());
-        document.getElementById('decodeBtn').addEventListener('click', () => this.decodeMessage());
-    }
-
-    switchTab(tab) {
-        // Remove active class from all tabs and panels
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-
-        // Add active class to clicked tab and corresponding panel
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.panel).classList.add('active');
-    }
-
-    setupDropZone(dropZoneId, inputId, previewId, btnId) {
-        const dropZone = document.getElementById(dropZoneId);
-        const input = document.getElementById(inputId);
-        const preview = document.getElementById(previewId);
-        const btn = document.getElementById(btnId);
-
-        dropZone.addEventListener('click', () => input.click());
-        
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = 'var(--primary-color)';
-        });
-        
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.style.borderColor = 'var(--input-border)';
-        });
-        
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.style.borderColor = 'var(--input-border)';
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                this.handleImageUpload(file, preview, btn);
-            }
-        });
-
-        input.addEventListener('change', () => {
-            if (input.files[0]) {
-                this.handleImageUpload(input.files[0], preview, btn);
-            }
-        });
-    }
-
-    handleImageUpload(file, preview, btn) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-            btn.disabled = false;
-            this.currentImage = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-
-    encodeMessage() {
-        const message = document.getElementById('stegMessage').value;
-        if (!message || !this.currentImage) return;
-
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const encodedData = this.encode(imageData.data, message);
-            ctx.putImageData(new ImageData(encodedData, canvas.width, canvas.height), 0, 0);
-
-            // Show download button
-            document.getElementById('stegDownload').style.display = 'block';
-            document.getElementById('downloadBtn').onclick = () => {
-                const link = document.createElement('a');
-                link.download = 'encoded_image.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            };
-        };
-        img.src = this.currentImage;
-    }
-
-    decodeMessage() {
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const message = this.decode(imageData.data);
-
-            document.getElementById('decodeResult').style.display = 'block';
-            document.getElementById('decodedMessage').value = message;
-        };
-        img.src = this.currentImage;
-    }
-
-    encode(imageData, message) {
-        const binaryMessage = this.textToBinary(message + '|END|');
-        let binaryIndex = 0;
-
-        const newData = new Uint8ClampedArray(imageData);
-        for (let i = 0; i < newData.length; i += 4) {
-            if (binaryIndex < binaryMessage.length) {
-                // Modify only the least significant bit of the red channel
-                newData[i] = (newData[i] & 254) | parseInt(binaryMessage[binaryIndex]);
-                binaryIndex++;
-            }
-        }
-
-        return newData;
-    }
-
-    decode(imageData) {
-        let binaryMessage = '';
-        for (let i = 0; i < imageData.length; i += 4) {
-            binaryMessage += imageData[i] & 1;
-        }
-
-        const message = this.binaryToText(binaryMessage);
-        const endIndex = message.indexOf('|END|');
-        return endIndex !== -1 ? message.substring(0, endIndex) : message;
-    }
-
-    textToBinary(text) {
-        return text.split('').map(char => 
-            char.charCodeAt(0).toString(2).padStart(8, '0')
-        ).join('');
-    }
-
-    binaryToText(binary) {
-        const bytes = binary.match(/.{1,8}/g) || [];
-        return bytes.map(byte => 
-            String.fromCharCode(parseInt(byte, 2))
-        ).join('');
-    }
-}
-new SteganographyTool();
-
-// QR Code Generator
-document.getElementById('qrEncryptToggle').addEventListener('change', function() {
-    document.getElementById('qrPasswordInput').style.display = this.checked ? 'block' : 'none';
-});
-
-function generateQR() {
-    const text = document.getElementById('qrText').value;
-    const container = document.getElementById('qrcode');
-    const downloadBtn = document.getElementById('qrDownloadBtn');
-
-    if (!text) {
-        alert('Please enter text or URL');
-        return;
-    }
-
-    container.innerHTML = '';
-    downloadBtn.style.display = 'none';
-
-    let finalContent = text;
-    if (document.getElementById('qrEncryptToggle').checked) {
-        const password = document.getElementById('qrPassword').value;
-        if (!password) {
-            alert('Please enter encryption password');
-            return;
-        }
-        finalContent = CryptoJS.AES.encrypt(text, password).toString();
-    }
-
-    new QRCode(container, {
-        text: finalContent,
-        width: 200,
-        height: 200,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-
-    downloadBtn.style.display = 'block';
-}
-
-function downloadQR() {
-    const canvas = document.querySelector('#qrcode canvas');
-    const url = canvas.toDataURL('image/png');
-    const a = document.createElement('a');
-    a.download = 'cyberguard-qrcode.png';
-    a.href = url;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-}
-
-function convertBase() {
-  const input = document.getElementById('baseInput').value.trim();
-  const direction = document.getElementById('conversionDirection').value;
-  const conversionType = document.getElementById('conversionType').value;
-  let result = '';
-
-  if (!input) {
-    alert("Please enter some text or code");
-    return;
-  }
-
-  if (direction === "encode") {
-    // Convert each character of the input to the chosen base
-    for (let i = 0; i < input.length; i++) {
-      const code = input.charCodeAt(i);
-      if (conversionType === "binary") {
-        result += code.toString(2).padStart(8, '0') + " ";
-      } else if (conversionType === "hex") {
-        result += code.toString(16).padStart(2, '0') + " ";
-      } else if (conversionType === "decimal") {
-        result += code + " ";
-      }
-    }
-  } else if (direction === "decode") {
-    // Split the input on whitespace for decoding
-    const tokens = input.split(/\s+/);
-    tokens.forEach(token => {
-      if (conversionType === "binary") {
-        const charCode = parseInt(token, 2);
-        result += String.fromCharCode(charCode);
-      } else if (conversionType === "hex") {
-        const charCode = parseInt(token, 16);
-        result += String.fromCharCode(charCode);
-      } else if (conversionType === "decimal") {
-        const charCode = parseInt(token, 10);
-        result += String.fromCharCode(charCode);
-      }
-    });
-  }
-
-  document.getElementById('baseOutput').value = result.trim();
-}
-
-function computeFileHash() {
-  const fileInput = document.getElementById('integrityFile');
-  const algorithm = document.getElementById('hashAlgorithmSelect').value;
-  const outputArea = document.getElementById('integrityOutput');
-
-  if (!fileInput.files.length) {
-    alert("Please select a file.");
-    return;
-  }
-
-  const file = fileInput.files[0];
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    try {
-      // Convert file data (ArrayBuffer) to a CryptoJS WordArray
-      const wordArray = CryptoJS.lib.WordArray.create(e.target.result);
-      let hash;
-      if (algorithm === "MD5") {
-        hash = CryptoJS.MD5(wordArray).toString();
-      } else if (algorithm === "SHA-256") {
-        hash = CryptoJS.SHA256(wordArray).toString();
-      } else if (algorithm === "SHA-512") {
-        hash = CryptoJS.SHA512(wordArray).toString();
-      }
-      outputArea.value = hash;
-    } catch (err) {
-      alert("Error computing hash: " + err.message);
-    }
-  };
-
-  reader.readAsArrayBuffer(file);
-}
-
-// Utility function to escape HTML entities
-function escapeHtml(text) {
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return text.replace(/[&<>"']/g, m => map[m]);
-}
-
-function compareText() {
-  const text1 = document.getElementById("diffInput1").value;
-  const text2 = document.getElementById("diffInput2").value;
-
-  if (!text1 || !text2) {
-    alert("Please enter text in both fields.");
-    return;
-  }
-
-  // Use jsdiff to compute a word-based diff
-  const diff = Diff.diffWords(text1, text2);
-
-  let resultHtml = "";
-  diff.forEach(part => {
-    // Wrap added parts in green background; removed parts in red background
-    if (part.added) {
-      resultHtml += `<span style="background-color: #008000;">${escapeHtml(part.value)}</span>`;
-    } else if (part.removed) {
-      resultHtml += `<span style="background-color: #ff0000;">${escapeHtml(part.value)}</span>`;
-    } else {
-      resultHtml += `<span>${escapeHtml(part.value)}</span>`;
-    }
-  });
-
-  document.getElementById("diffOutput").innerHTML = resultHtml;
-}
-
-
-    </script>
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
